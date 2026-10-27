@@ -1,0 +1,6 @@
+{
+  "name": "NexusAuto AI — Business Autonome & Hyper-Rentabilité",
+  "description": "Plateforme d'automatisation complète de business digital : génération de contenu multi-plateforme, support client IA 24/7, optimisation prédictive des conversions, synchronisation publicitaire et transactions chiffrées.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
