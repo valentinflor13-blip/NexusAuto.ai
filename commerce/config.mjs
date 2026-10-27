@@ -4,6 +4,7 @@ import path from 'node:path';
 
 export function readConfig(env = process.env) {
   const config = {
+    available: false,
     origin: env.APP_URL || 'http://localhost:3000',
     mode: env.PAYMENT_MODE === 'live' ? 'live' : 'test',
     enabled: env.CHECKOUT_ENABLED === 'true',
