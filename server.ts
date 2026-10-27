@@ -13,8 +13,8 @@ const config = readConfig();
 const store = openStore(config.databasePath);
 const stripe = /^[sr]k_(test|live)_/.test(config.stripeKey)
   ? new Stripe(config.stripeKey, { apiVersion: '2026-08-26.dahlia', maxNetworkRetries: 2, timeout: 15000 }) : null;
-const app = createApp({ config, store, stripe });
 const production = process.env.NODE_ENV === 'production';
+const app = createApp({ config, store, stripe, development: !production });
 if (production) {
   app.use(express.static(path.join(directory, 'dist'), { index: false }));
 } else {

@@ -6,7 +6,7 @@ function buyerToken(req) {
   return (req.headers.cookie || '').match(/(?:^|;\s*)nexus_buyer=([a-f0-9]{64})(?:;|$)/)?.[1];
 }
 
-export function createApp({ config, store, stripe }) {
+export function createApp({ config, store, stripe, development = false }) {
   const app = express();
   const service = createCommerce({ config, store, stripe });
   app.disable('x-powered-by');
@@ -14,7 +14,7 @@ export function createApp({ config, store, stripe }) {
   app.use((req, res, next) => {
     res.set({ 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer',
       'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY',
-      'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self' https://checkout.stripe.com" });
+      'Content-Security-Policy': `default-src 'self'; script-src 'self'${development ? " 'unsafe-inline'" : ''}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self' https://checkout.stripe.com` });
     next();
   });
   const attempts = new Map();
